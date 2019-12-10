@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+
+<AnchorPane prefHeight="140.0" prefWidth="300.0" styleClass="background" stylesheets="@DarkTheme.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hanly.address.view.FileSaveDialogController">
+   <children>
+      <Label layoutX="60.0" layoutY="41.0" prefHeight="29.0" prefWidth="192.0" text="文件未保存，是否保存？" />
+      <HBox layoutX="127.0" layoutY="91.0" spacing="8.0" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0">
+         <children>
+            <Button layoutX="120.0" layoutY="83.0" mnemonicParsing="false" onAction="#handleOk" prefWidth="70.0" styleClass="button1" text="OK" />
+            <Button layoutX="175.0" layoutY="83.0" mnemonicParsing="false" onAction="#handleCancel" prefWidth="70.0" styleClass="button2" text="Cancel" />
+         </children>
+      </HBox>
+      <Label layoutX="14.0" layoutY="14.0" prefHeight="25.0" prefWidth="63.0" text="提示：" />
+   </children>
+</AnchorPane>
