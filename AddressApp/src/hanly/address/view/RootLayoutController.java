@@ -110,6 +110,28 @@ public class RootLayoutController {
     }
 
     /**
+     * 打开文件选择器，让用户选择要添加的通讯簿
+     */
+    @FXML
+    private void handleConnect() {
+    	FileChooser fileChooser = new FileChooser();
+
+        // 设置扩展筛选器
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter(
+                "XML files (*.xml)", "*.xml");
+        fileChooser.getExtensionFilters().add(extFilter);
+
+        // 显示保存文件对话框
+        File file = fileChooser.showOpenDialog(mainApp.getPrimaryStage());
+
+        if (file != null) {
+            mainApp.connectPersonDataFromFile(file);
+        }
+
+        hasSave = 0;
+    }
+
+    /**
      * 将文件保存到当前打开的个人文件。如果没有
      * 打开文件，显示“另存为”对话框。
      */

@@ -22,6 +22,7 @@ public class Person {
     private final StringProperty street;
     private final IntegerProperty postalCode;
     private final StringProperty city;
+    private final StringProperty image;
     private final ObjectProperty<LocalDate> birthday;
 
     /**
@@ -45,6 +46,7 @@ public class Person {
         this.street = new SimpleStringProperty("no street");
         this.postalCode = new SimpleIntegerProperty(261000);
         this.city = new SimpleStringProperty("no city");
+        this.image = new SimpleStringProperty("file:resources/images/person.png");
         this.birthday = new SimpleObjectProperty<LocalDate>(LocalDate.of(1900, 1, 1));
     }
 
@@ -108,7 +110,19 @@ public class Person {
         return city;
     }
 
-    @XmlJavaTypeAdapter(LocalDateAdapter.class)
+    public String getImage() {
+		return image.get();
+	}
+
+    public void setImage(String image) {
+    	this.image.set(image);
+	}
+
+    public StringProperty ImageProperty() {
+		return image;
+	}
+
+	@XmlJavaTypeAdapter(LocalDateAdapter.class)
     public LocalDate getBirthday() {
         return birthday.get();
     }

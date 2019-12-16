@@ -26,6 +26,8 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -291,6 +293,26 @@ public class MainApp extends Application {
         }
     }
 
+    /**
+     * 返回图片路径，如果没有图片，返回null
+     *
+     * @return 如果用户点击OK返回true, 否则返回false
+     */
+    public String getImage() {
+    	FileChooser fileChooser = new FileChooser();
+    	fileChooser.setTitle("选择图片");
+    	//过滤选择文件类型
+		fileChooser.getExtensionFilters().addAll(new ExtensionFilter("图片类型","*.jpg","*.png"));
+		//显示选择窗口,获取选中文件
+		File file =  fileChooser.showOpenDialog(new Stage());
+        if (file.getAbsolutePath() != null) {
+        	String filePath = "file:"+file.getAbsolutePath();
+            return filePath;
+        } else {
+            return null;
+        }
+    }
+
 
     /**
      * 为当前用户文件设置路径，路径维持在操作系统特定注册表中
@@ -341,7 +363,6 @@ public class MainApp extends Application {
         }
     }
 
-
     /**
      * 保存当前数据到特定用户文件
      *
@@ -367,6 +388,33 @@ public class MainApp extends Application {
             Alert alert = new Alert(AlertType.WARNING);
         	alert.setTitle("错误");
         	alert.setHeaderText("无法保存内容到文件:\n" + file.getPath());
+        	alert.showAndWait();
+        }
+    }
+
+    /**
+     * 从特定文件加载用户数据，并添加到当前数据
+     *
+     * @param file
+     */
+    public void connectPersonDataFromFile(File file) {
+        try {
+            JAXBContext context = JAXBContext
+                    .newInstance(PersonListWrapper.class);
+            Unmarshaller um = context.createUnmarshaller();
+
+            // 从文件读取XML数据并解包
+            PersonListWrapper wrapper = (PersonListWrapper) um.unmarshal(file);
+
+            personData.addAll(wrapper.getPersons());
+
+            // 保存路径到注册表
+            setPersonFilePath(file);
+
+        } catch (Exception e) {
+            Alert alert = new Alert(AlertType.WARNING);
+        	alert.setTitle("错误");
+        	alert.setHeaderText("无法读取文件内容:\n" + file.getPath());
         	alert.showAndWait();
         }
     }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
@@ -7,7 +8,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
 
-<AnchorPane prefHeight="300.0" prefWidth="400.0" styleClass="background" stylesheets="@DarkTheme.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hanly.address.view.PersonEditDialogController">
+<AnchorPane prefHeight="300.0" prefWidth="400.0" styleClass="background" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hanly.address.view.PersonEditDialogController">
    <children>
       <GridPane layoutX="20.0" layoutY="25.0" maxHeight="200.0" maxWidth="360.0" prefHeight="200.0" prefWidth="360.0" AnchorPane.topAnchor="25.0">
         <columnConstraints>
@@ -40,8 +41,11 @@
       <HBox layoutX="192.0" layoutY="253.0" spacing="18.0" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="20.0">
          <children>
             <Button mnemonicParsing="false" onAction="#handleOk" prefHeight="25.0" prefWidth="70.0" styleClass="button1" text="OK" />
-            <Button mnemonicParsing="false" onAction="#handleCancel" prefHeight="25.0" prefWidth="70.0" styleClass="button2" text="Cancel" />
+            <Button mnemonicParsing="false" onAction="#handleCancel" prefHeight="25.0" prefWidth="95.0" styleClass="button2" text="Cancel" />
          </children>
       </HBox>
    </children>
+   <stylesheets>
+      <URL value="@DarkTheme.css" />
+   </stylesheets>
 </AnchorPane>

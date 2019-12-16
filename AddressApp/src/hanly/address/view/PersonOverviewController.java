@@ -4,7 +4,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import hanly.address.MainApp;
 import hanly.address.model.Person;
 import hanly.address.util.DateUtil;
@@ -29,6 +30,9 @@ public class PersonOverviewController {
     private Label cityLabel;
     @FXML
     private Label birthdayLabel;
+
+    @FXML
+    private ImageView personImage;
 
     // 对主应用程序的引用
     private MainApp mainApp;
@@ -73,6 +77,8 @@ public class PersonOverviewController {
             cityLabel.setText(person.getCity());
             birthdayLabel.setText(DateUtil.format(person.getBirthday()));
             //把生日变成一个字符串！
+            Image image = new Image(person.getImage());
+            personImage.setImage(image);
 
         } else {
             // Person为空，删除所有文本
@@ -82,6 +88,8 @@ public class PersonOverviewController {
             postalCodeLabel.setText("");
             cityLabel.setText("");
             birthdayLabel.setText("");
+            Image image = new Image("file:resources/images/person.png");
+            personImage.setImage(image);
         }
     }
 
@@ -124,6 +132,22 @@ public class PersonOverviewController {
 	            if (okClicked) {
 	                showPersonDetails(selectedPerson);
 	            }
+	        }
+    	}
+    }
+
+    /**
+     * 当用户单击图片时调用。打开要编辑所选人员的图片的对话框
+     */
+    @FXML
+    public void handleImage() {
+    	int selectedIndex = personTable.getSelectionModel().getSelectedIndex();
+    	if(selectedIndex>=0) {
+	        Person selectedPerson = personTable.getSelectionModel().getSelectedItem();
+	        if (selectedPerson != null) {
+	        	String imagePath = mainApp.getImage();
+	        	selectedPerson.setImage(imagePath);
+	        	showPersonDetails(selectedPerson);
 	        }
     	}
     }
